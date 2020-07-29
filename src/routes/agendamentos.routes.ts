@@ -13,6 +13,8 @@ agendamentosRouter.use(garantirAutenticacao);
 agendamentosRouter.get('/', async (request, response) => {
     const agendamentosRepository = getCustomRepository(AgendamentosRepository);
     
+    console.log('/agendamentos '+request.usuario.id);
+
     const agendamentos = await agendamentosRepository.find();
     return response.json(agendamentos);
 });

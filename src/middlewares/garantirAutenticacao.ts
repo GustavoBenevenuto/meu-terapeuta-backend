@@ -29,6 +29,9 @@ export default function garantirAutenticacao(
 
         const { sub } = tokenDecodificado as TokenPayload;
 
+        request.usuario = {
+            id: sub,
+        }
 
         return next();
 

@@ -4,10 +4,11 @@ import {  getCustomRepository } from 'typeorm';
 
 import AgendamentosRepository from '../repositories/AgendamentosRepository';
 import CriarAgendamentoService from '../services/CriarAgendamentoService'
+import garantirAutenticacao from '../middlewares/garantirAutenticacao';
 
 const agendamentosRouter = Router();
 
-
+agendamentosRouter.use(garantirAutenticacao);
 
 agendamentosRouter.get('/', async (request, response) => {
     const agendamentosRepository = getCustomRepository(AgendamentosRepository);

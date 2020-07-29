@@ -3,7 +3,8 @@ import { compare } from 'bcryptjs';
 import { sign } from 'jsonwebtoken';
 
 import Usuario from '../models/Usuario';
-import sessaoRouter from '../routes/sessao.routes';
+import autenticacao from '../config/autenticacao';
+
 
 interface RequestDTO {
     email: string;
@@ -36,10 +37,10 @@ export default class CriaSessaoService {
         //Gerar Token
         const token = sign(
             {},
-            'fb361a4e627b35989c6b04954e20638d',
+            autenticacao.jwt.secret,
             {
                 subject: usuario.id,
-                expiresIn: '1d'
+                expiresIn: autenticacao.jwt.expiresIn
             }
         )
 

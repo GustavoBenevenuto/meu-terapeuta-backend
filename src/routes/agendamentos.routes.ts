@@ -21,7 +21,7 @@ agendamentosRouter.get('/', async (request, response) => {
 
 agendamentosRouter.post('/', async (request, response) => {
     try {
-        const { provedor, data } = request.body;
+        const { provedor_id, data } = request.body;
 
         const horaConvertida = parseISO(data);
 
@@ -29,7 +29,7 @@ agendamentosRouter.post('/', async (request, response) => {
 
         const agendamentos = await criarAgendamentoService.execute(
             {
-                provedor,
+                provedor_id,
                 data: horaConvertida,
             }
         );

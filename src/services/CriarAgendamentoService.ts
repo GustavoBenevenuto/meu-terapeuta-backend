@@ -5,12 +5,12 @@ import AgendamentosRepository from '../repositories/AgendamentosRepository'
 import Agendamento from '../models/Agendamento';
 
 interface RequestDTO{
-    provedor: string;
+    provedor_id: string;
     data: Date;
 }
 
 export default class CriarAgendamentoService {
-    public async execute({provedor, data} : RequestDTO) : Promise<Agendamento> {
+    public async execute({provedor_id, data} : RequestDTO) : Promise<Agendamento> {
         const agendamentosRepository = getCustomRepository(AgendamentosRepository);
 
         const inicioDaHora = startOfHour(data);
@@ -21,7 +21,7 @@ export default class CriarAgendamentoService {
         }
 
         const agendamento = agendamentosRepository.create({
-            provedor,
+            provedor_id,
             data: inicioDaHora,
         });
 

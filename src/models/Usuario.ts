@@ -15,6 +15,9 @@ export default class Usuario {
     @Column()
     senha: string;
 
+    @Column()
+    avatar: string;
+
     @CreateDateColumn()
     created_at: Date;
 

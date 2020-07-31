@@ -4,6 +4,7 @@ import { sign } from 'jsonwebtoken';
 
 import Usuario from '../models/Usuario';
 import autenticacao from '../config/autenticacao';
+import AppError from '../errors/AppError';
 
 
 interface RequestDTO {
@@ -25,13 +26,13 @@ export default class CriaSessaoService {
         });
 
         if(!usuario){
-            throw new Error('E-mail ou senha incorretas');
+            throw new AppError('E-mail ou senha incorretas');
         }
 
         const senhaValida = await compare(senha, usuario.senha);
 
         if(!senhaValida){
-            throw new Error('E-mail ou senha incorretas');
+            throw new AppError('E-mail ou senha incorretas');
         }
 
         //Gerar Token

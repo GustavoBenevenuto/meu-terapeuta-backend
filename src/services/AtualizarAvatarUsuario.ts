@@ -4,6 +4,7 @@ import fs from 'fs';
 
 import Usuario from '../models/Usuario';
 import upload from '../config/upload';
+import AppError from '../errors/AppError';
 
 interface RequestDTO {
     usuario_id : string;        
@@ -17,7 +18,7 @@ export default class AtualizarAvatarUsuario{
         const usuario = await usuarioRepository.findOne(usuario_id);
 
         if(!usuario){
-            throw new Error('Somente usuários autenticados podem alterar o avatar');
+            throw new AppError('Somente usuários autenticados podem alterar o avatar',401);
         }
 
         // Deletar avatar anterior

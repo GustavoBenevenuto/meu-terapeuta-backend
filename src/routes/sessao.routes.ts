@@ -5,19 +5,15 @@ import CriaSessaoService from '../services/CriaSessaoService';
 const sessaoRouter = Router();
 
 sessaoRouter.post('/', async (request, response) => {
-    try {
-        const { email, senha } = request.body;
+    const { email, senha } = request.body;
 
-        const criaSessao = new CriaSessaoService();
+    const criaSessao = new CriaSessaoService();
 
-        const {usuario, token} = await criaSessao.execute({ email, senha });
+    const { usuario, token } = await criaSessao.execute({ email, senha });
 
-        delete usuario.senha;
+    delete usuario.senha;
 
-        return response.json({usuario, token});
-    } catch (error) {
-        return response.json(error.message);
-    }
+    return response.json({ usuario, token });
 });
 
 export default sessaoRouter;

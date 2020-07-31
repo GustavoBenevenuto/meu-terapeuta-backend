@@ -1,6 +1,7 @@
 import { Request, Response, NextFunction, request } from 'express';
 import { verify } from 'jsonwebtoken';
 import autenticacao from '../config/autenticacao';
+import AppError from '../errors/AppError';
 
 interface TokenPayload {
 
@@ -19,7 +20,7 @@ export default function garantirAutenticacao(
     const cabecalhoAutenticacao = request.headers.authorization;
 
     if (!cabecalhoAutenticacao) {
-        throw new Error('O token está ausente');
+        throw new AppError('O token está ausente',401);
     }
 
     const [tipo, token] = cabecalhoAutenticacao.split(' ');
@@ -36,6 +37,6 @@ export default function garantirAutenticacao(
         return next();
 
     } catch (error) {
-        throw new Error('Token inválido');
+        throw new AppError('Token inválido',401);
     }
 } 

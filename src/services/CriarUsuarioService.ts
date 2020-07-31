@@ -2,6 +2,7 @@ import { getRepository } from 'typeorm';
 
 import Usuario from '../models/Usuario';
 import { request } from 'express';
+import AppError from '../errors/AppError';
 
 interface RequestDTO {
     nome: string;
@@ -22,7 +23,7 @@ export default class CriaUsuarioService {
             });
 
         if (usuarioExiste) {
-            throw new Error('Este e-mail já está sendo usado');
+            throw new AppError('Este e-mail já está sendo usado');
         }
 
         const user = usuarioRepository.create(

@@ -3,6 +3,7 @@ import { getCustomRepository } from 'typeorm';
 
 import AgendamentosRepository from '../repositories/AgendamentosRepository'
 import Agendamento from '../models/Agendamento';
+import AppError from '../errors/AppError';
 
 interface RequestDTO{
     provedor_id: string;
@@ -17,7 +18,7 @@ export default class CriarAgendamentoService {
 
         const buscarData = await agendamentosRepository.buscarPorData(inicioDaHora);
         if (buscarData) {
-            throw Error('Este agendamento já está reservado');
+            throw new AppError('Este agendamento já está reservado');
         }
 
         const agendamento = agendamentosRepository.create({
